@@ -107,3 +107,6 @@ legend({['\chi = ',num2str(FIRIprofiles(1).Chi),'\circ',...
     '; Month = ', num2str(FIRIprofiles(3).Month),...
     '; F10.7 = ', num2str(FIRIprofiles(3).F107)]},'Location','best')
 ```
+## Cite as
+Also this package is available on Matlab Central File Exchange
+>Aleksey Tipikin (2024). FIRI-2018 (https://www.mathworks.com/matlabcentral/fileexchange/160586-firi-2018), MATLAB Central File Exchange. Retrieved March 12, 2024.

@@ -27,15 +27,15 @@
 %You can use FIRI2018 gridded interpolant object directly.
 %Example:
 %1. Load it from the MAT-file
-FIRIpath = 'C:\FIRI2018\'; %write here path to FIRI files
+FIRIpath = 'F:\Computations\Matlab\FIRI-2018\'; %write here path to FIRI files
 FIRIDataFile = 'FIRI2018data.mat'; %name of the MAT-file
 load(fullfile(FIRIpath,FIRIDataFile),'FIRI2018')
 %2. Enter input arguments
 Height = (55:150)';
-Chi = 0 + zeros(size(Height2));
-Lat = 40 + zeros(size(Height2));
-Month = 4 + zeros(size(Height2));
-F107 = 100 + zeros(size(Height2));
+Chi = 0 + zeros(size(Height));
+Lat = 40 + zeros(size(Height));
+Month = 4 + zeros(size(Height));
+F107 = 100 + zeros(size(Height));
 %3. Use FIRI2018 object
 prf = FIRI2018(Height,Chi,Lat,Month,F107);
 %4. Plot profile
@@ -113,3 +113,27 @@ legend({['\chi = ',num2str(FIRIprofiles(1).Chi),'\circ',...
     '; Lat = ', num2str(FIRIprofiles(3).Lat),'\circ',...
     '; Month = ', num2str(FIRIprofiles(3).Month),...
     '; F10.7 = ', num2str(FIRIprofiles(3).F107)]},'Location','best')
+%% Read F10.7 index from 'apf10.7.dat'
+%If your need to read F10.7 index from 'apf10.7.dat' file use apf107read
+%function. Example is below. File 'apf10.7.dat' can be downloaded from 
+%https://irimodel.org. Also you can change apf107read.m file to parse it
+%from the irimodel.org directly.
+
+%Date
+Month = 4; Day = 15; Year = 2015;
+%Last two digits of the year
+Year2d = Year - round(Year,-2);
+
+Chi = 47;
+Lat = 40;
+
+%Reading data from 'apf107.dat'
+apf107data = apf107read;
+
+%F10.7 index for specified date
+F107 = apf107data.F107day(all([apf107data.year==Year2d,...
+    apf107data.month==Month,apf107data.day==Day],2));
+
+%Then use FIRI2018func as usual
+FIRIprofiles = FIRI2018func(Height,Chi,...
+        Lat,Month,F107,eDecay,'method','straight');

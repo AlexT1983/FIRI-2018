@@ -3,8 +3,8 @@
 
 FIRI2018 is a model of electron density in lower ionosphere.
 You can read about in:
-1. Friedrich M. Handbook of Lower Ionosphere. / Friedrich M. – Graz: Verlag der Technischen Universitat Graz, 2016. – 168 p.
-2. Friedrich M. FIRI-2018, an updated empirical model of the lower ionosphere. / Friedrich M., Pock C., Torkar K. // Journal of Geophysical Research. – 2018. – No. 123. – P. 6737–6751.
+1. Friedrich M. Handbook of Lower Ionosphere. / Friedrich M. â€“ Graz: Verlag der Technischen Universitat Graz, 2016. â€“ 168 p.
+2. Friedrich M. FIRI-2018, an updated empirical model of the lower ionosphere. / Friedrich M., Pock C., Torkar K. // Journal of Geophysical Research. â€“ 2018. â€“ No. 123. â€“ P. 6737â€“6751.
 
 There are several files in the package:
 1. FIRI_data.xlsx - raw data file from the article [1].
@@ -106,6 +106,32 @@ legend({['\chi = ',num2str(FIRIprofiles(1).Chi),'\circ',...
     '; Lat = ', num2str(FIRIprofiles(3).Lat),'\circ',...
     '; Month = ', num2str(FIRIprofiles(3).Month),...
     '; F10.7 = ', num2str(FIRIprofiles(3).F107)]},'Location','best')
+```
+## Read F10.7 index from 'apf10.7.dat'
+If your need to read F10.7 index from 'apf10.7.dat' file use apf107read
+function. Example is below. File 'apf10.7.dat' can be downloaded from 
+https://irimodel.org. Also you can change apf107read.m file to parse it
+from the irimodel.org directly.
+
+```
+%Date
+Month = 4; Day = 15; Year = 2015;
+%Last two digits of the year
+Year2d = Year - round(Year,-2);
+
+Chi = 47;
+Lat = 40;
+
+%Reading data from 'apf107.dat'
+apf107data = apf107read;
+
+%F10.7 index for specified date
+F107 = apf107data.F107day(all([apf107data.year==Year2d,...
+    apf107data.month==Month,apf107data.day==Day],2));
+
+%Then use FIRI2018func as usual
+FIRIprofiles = FIRI2018func(Height,Chi,...
+        Lat,Month,F107,eDecay,'method','straight');
 ```
 ## Cite as
 Also this package is available on Matlab Central File Exchange

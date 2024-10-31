@@ -135,5 +135,6 @@ FIRIprofiles = FIRI2018func(Height,Chi,...
 ```
 ## Cite as
 >Tipikin, Aleksey, and Aleksandr Kuzhelev. “FIRI-2018: MATLAB Package for the Lower Ionosphere Model.” 2024 8th Scientific School Dynamics of Complex Networks and Their Applications (DCNA), IEEE, 2024, pp. 232–34, doi:10.1109/dcna63495.2024.10718582.
+>
 Also this package is available on Matlab Central File Exchange
 >Aleksey Tipikin (2024). FIRI-2018 (https://www.mathworks.com/matlabcentral/fileexchange/160586-firi-2018), MATLAB Central File Exchange. Retrieved March 12, 2024.
